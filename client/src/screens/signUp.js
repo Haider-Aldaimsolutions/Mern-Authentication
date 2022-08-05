@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { useState } from 'react';
-import {Button,CssBaseline,Container,Box,Typography,Grid,TextField,Link,Checkbox,FormControlLabel} from '@mui/material';
+import { Button, CssBaseline, Container, Box, Typography, Grid, TextField, Link, Checkbox } from '@mui/material';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import signup_logo from '../assets/signup_logo.png'
 
@@ -19,39 +19,39 @@ function Copyright(props) {
 const theme = createTheme();
 
 export default function SignUP() {
-  
-  const [firstName,setfirstName]=useState('');
-  const [lastName,setlastName]=useState('');
-  const [email,setEmail]=useState('');
-  const [password,setPassword]=useState('');
-  const [agree,setAgree]=useState(false);
-  
- async function handleSubmit(event){
-     event.preventDefault();
-     const data=new FormData(event.currentTarget);
-    let allEntered=data.get('firstName')!==''&&data.get('lastName')!==''&&data.get('email')!==''&&data.get('password')!==''&&agree
-    if(allEntered){
-    const response= await fetch('http://localhost:1337/api/register',{
-        method:'POST',
-        headers:{
-            'Content-Type':'application/json',
+
+  const [firstName, setfirstName] = useState('');
+  const [lastName, setlastName] = useState('');
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [agree, setAgree] = useState(false);
+
+  async function handleSubmit(event) {
+    event.preventDefault();
+    const data = new FormData(event.currentTarget);
+    let allEntered = data.get('firstName') !== '' && data.get('lastName') !== '' && data.get('email') !== '' && data.get('password') !== '' && agree
+    if (allEntered) {
+      const response = await fetch('http://localhost:1337/api/register', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
         },
-        body:JSON.stringify({
-        firstName,
-        lastName,
-        email,
-        password,
+        body: JSON.stringify({
+          firstName,
+          lastName,
+          email,
+          password,
         })
       })
-    const data=await response.json()
-    console.log('=============Server Response============');
-    console.log(data);
-    console.log('========================================');  
+      const data = await response.json()
+      console.log('==============');
+      console.log(data);
+      console.log('==============');
     }
     else { alert("Please Fill all the fields") }
 
   };
-  
+
 
   return (
     <ThemeProvider theme={theme}>
@@ -65,7 +65,7 @@ export default function SignUP() {
             alignItems: 'center',
           }}
         >
-          <img src={signup_logo}  className='signup-logo' alt="signUP"/>
+          <img src={signup_logo} className='signup-logo' alt="signUP" />
           <Typography component="h1" variant="h5" className='signup-header'>
             Sign up in to my World
           </Typography>
@@ -119,8 +119,8 @@ export default function SignUP() {
               </Grid>
 
               <Grid item xs={12}>
-               <Checkbox sx={{ml:-1.5}} onClick={()=>setAgree(!agree)} value="allowExtraEmails" color="primary" />
-                I agree to all <Link href="#" style={{textDecoration:'none'}}>terms & conditions</Link>
+                <Checkbox sx={{ ml: -1.5 }} onClick={() => setAgree(!agree)} value="allowExtraEmails" color="primary" />
+                I agree to all <Link href="#" style={{ textDecoration: 'none' }}>terms & conditions</Link>
               </Grid>
 
             </Grid>
@@ -134,7 +134,7 @@ export default function SignUP() {
             </Button>
             <Grid container justifyContent="center">
               <Grid item>
-                <Link href="#" variant="body2" align='center'>
+                <Link href="/login" variant="body2" align='center'>
                   Already have an account? Sign in
                 </Link>
               </Grid>
